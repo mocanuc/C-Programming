@@ -1,0 +1,9 @@
+global outputStr
+recursiveString(i, str)
+	if i < str.length
+		char y <- str[i]
+		if y it not a vowel
+			add i to outputStr
+		i++
+		recursiveString()
+	return outputStr

@@ -1,0 +1,88 @@
+#include "stdafx.h"
+#include<iostream>
+#include<vector>
+
+class vertex
+{
+public:
+	int value;
+	std::vector<vertex*> edges;
+	vertex(int val) {
+		std::cout << "vertex constructor!" << std::endl;
+		this->value = val;
+	}
+	~vertex() {
+		std::cout << "vertex destructor!" << std::endl;
+	}
+};
+
+class graph
+{
+
+public:
+	std::vector<vertex*> graphlist;
+	int graphSize;
+	graph()
+	{
+		std::cout << "Graph constructor!" << std::endl;
+		//int a[10];
+		while (true)
+		{
+			std::cout << "How many vertex (max 10)" << std::endl;
+			std::cin >> this->graphSize;
+			if (this->graphSize > 10)
+			{
+				std::cout << "The size is bigger than 10." << std::endl;
+			}
+			else
+				break;
+		}
+	}
+	~graph() {
+		std::cout << "Graph destructor!" << std::endl;
+	}
+	 void addVertex()
+	 {
+		 for (int i = 0; i < this->graphSize; i++)
+		 {
+			 int vecotrValue;
+			 std::cout << "Enter the " << i + 1 << " vector." << std::endl;
+			 std::cin >> vecotrValue;
+			 this->graphlist.push_back(new vertex(vecotrValue));
+		 }
+	 }
+	void addEdge(int x, int y)
+	{
+		this->graphlist.at(x - 1)->edges.push_back(this->graphlist.at(y - 1));
+		this->graphlist.at(y - 1)->edges.push_back(this->graphlist.at(x - 1));
+	}
+	void displayGraph()
+	{
+		for (int i = 0; i < this->graphSize; i++)
+		{
+			std::cout << this->graphlist.at(i)->value << ">";							//print vertex value
+			for (int x = 0; x < this->graphlist.at(i)->edges.size(); x++)
+			{
+				std::cout << " | " << this->graphlist.at(i)->edges.at(x)->value;		//print edges value
+			}
+			std::cout << std::endl;
+		}
+	}
+
+};
+
+int main(int argc, char *argv[])
+{
+	graph* G = new graph();
+	G->addVertex();
+	G->addEdge(1, 2);					//connect the eges (x <-> y)
+	G->addEdge(2, 5);
+	G->addEdge(2, 4);
+	G->addEdge(3, 4);
+	G->addEdge(4, 5);
+	G->displayGraph();
+
+	delete G;
+	return 0;
+}
+

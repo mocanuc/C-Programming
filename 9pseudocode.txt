@@ -1,0 +1,12 @@
+	left <- 0
+	right <- inputArray.size
+	rezult <- false
+	while left <= right
+		mid <- (left + right) / 2
+		if (searchLow <= inputArray[mid])and(inputArray[mid] <= searchHigh)
+			rezult <- true
+			break
+		else if searchLow > inputArray[mid]
+			left <- mid + 1
+		else if searchHigh < inputArray[mid]
+			right <- mid - 1

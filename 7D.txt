@@ -1,0 +1,37 @@
+#include "stdafx.h"
+#include<iostream>
+using namespace std;
+
+bool recursivePrime(int i, int n)
+{
+	bool nIsPrime = true;			//store a variable for return
+	i++;							
+	if (n % i == 0)					//check if a number is sivisible
+	{
+		nIsPrime = false;
+	}else if (i < n)
+	{
+		recursivePrime(i,n);						//Call himself
+	}
+	return nIsPrime;
+}
+
+int main()
+{   
+	int i = 1;
+	int n;
+	cout << "Input the number that you want to check if it is prime:" << endl;
+	cin >> n;															//get the input number n
+	bool nIsPrime = recursivePrime(i, n);								//Call the recursive function
+	if (nIsPrime == true)												//print out 
+	{
+		cout << "The number is a prime number";
+	}
+	else
+	{
+		cout << "The number is not a prime number";
+	}
+	return 0;
+}
+
+

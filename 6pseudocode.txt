@@ -1,0 +1,13 @@
+reverseWords(sentance)
+	space = " "
+	for i<-0 to sentance.length
+		if sentance[i] = space[0]
+			insertstr <- sentance.substr(biginWord, i - biginWord)
+			insertstr.insert(0, " ")
+			outputSentance.insert(0, insertstr)
+			biginWord <- i + 1
+		endword <- i + 1;
+	insertstr <- sentance.substr(biginWord, endword - biginWord)
+	insertstr.insert(0, " ")
+	outputSentance.insert(0, insertstr)
+	return outputSentance

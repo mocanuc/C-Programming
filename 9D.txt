@@ -1,0 +1,56 @@
+#include "stdafx.h"
+#include<iostream>
+using namespace std;
+
+int main()
+
+{
+	cout << "Plase type eight numberes" << endl;				//get the array
+	int inputArray[8];
+	int size = 8;
+	for (int i = 0; i < size; i++)
+	{
+		cin >> inputArray[i];
+	}
+
+	int searchLow;													//get the interval of numbers
+	int searchHigh;
+	cout << "Plase type the low numberes" << endl;
+	cin >> searchLow;
+	cout << "Plase type the high numberes" << endl;
+	cin >> searchHigh;
+
+
+	int left = 0;													//lower element of the array
+	int right = size - 1;											//higest element of the array
+	int mid;														//mid element of the array
+	bool rezult = false;
+	while (left <= right)
+	{
+		mid = (left + right) / 2;
+		if ((searchLow <= inputArray[mid])&&(inputArray[mid] <= searchHigh))
+		{
+			rezult = true;
+			break;
+		}
+		else if (searchLow > inputArray[mid])
+		{
+			left = mid + 1;
+		}
+		else if (searchHigh < inputArray[mid])
+		{
+			right = mid - 1;
+		}
+	}
+
+	if (rezult == true)
+	{
+		cout << "True" << endl;
+	}
+	else
+	{
+		cout << "False" << endl;
+	}
+	return 0;
+}
+

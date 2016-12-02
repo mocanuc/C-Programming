@@ -1,0 +1,33 @@
+#include "stdafx.h"
+#include<iostream>
+#include<string>
+using namespace std;
+
+string outputStr;								//store the size of the input string
+
+string recursiveString(int i, string str)
+{
+	if (i < str.length())						// breack condition
+	{
+		char y = str.at(i);						 // simplyfy the code for next line
+		if (y != 'a'&& y != 'e' && y != 'i'&& y != 'o'&& y != 'u')  // check every character if it a vowel
+		{
+			outputStr.append(str, i, 1);		// if it not a vowel it addin to a new string
+		}
+		i++;
+		recursiveString(i, str);				//Call himself
+	}
+	return outputStr;
+}
+
+int main()
+{
+	int i = 0;
+	string str = "";
+	cout << "Input the string:" << endl;        // get the string
+	cin >> str;
+	cout << recursiveString(i, str) << endl;	//Print out by calling the recursive function
+	return 0;
+}
+
+

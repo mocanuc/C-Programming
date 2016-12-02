@@ -1,0 +1,8 @@
+recursivePrime(i, n)
+	nIsPrime <- true		//store a variable for return
+	i++
+	if n % i = 0			//check if a number is sivisible
+		nIsPrime <- false
+	else if i < n
+		recursivePrime()	//Call himself
+	return nIsPrime

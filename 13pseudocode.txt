@@ -1,0 +1,24 @@
+class vertex
+public:
+	value
+	edges[]
+
+class graph
+public:
+	graphlist[]
+	graphSize
+
+	addVertex()
+		for i<-0 to graphSize
+			ask user for a vertexValue
+			add a vertex with vertexValue to the graphlist
+			
+	addEdge(x, y)
+		connect adge x to y
+		connect adge y to x
+		
+	displayGraph()
+		for i<-0 to graphSize
+		print out graphlist[i].value
+			for x<-0 to graphlist[i].edges.size
+				print graphlist[i].edges(x).value

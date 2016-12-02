@@ -1,0 +1,154 @@
+#include "stdafx.h"
+#include<iostream>
+#include<vector>
+#include<stack>
+#include <fstream>
+#include <queue>
+
+std::ofstream file;
+class vertex
+{
+public:
+	int value;
+	int vectorNum;
+	bool visited = false;
+	std::vector<vertex*> edges;
+	vertex(int val, int nr) {
+		std::cout << "vertex constructor!" << std::endl;
+		this->value = val;
+		this->vectorNum = nr;
+	}
+	~vertex() {
+		std::cout << "vertex destructor!" << std::endl;
+	}
+};
+
+class graph
+{
+
+public:
+	std::vector<vertex*> graphlist;
+	int graphSize;
+	graph()
+	{
+		std::cout << "Graph constructor!" << std::endl;
+		while (true)
+		{
+			std::cout << "How many vertex (max 10)" << std::endl;
+			std::cin >> this->graphSize;
+			if (this->graphSize > 10)
+			{
+				std::cout << "The size is bigger than 10." << std::endl;
+			}
+			else
+				break;
+		}
+	}
+	~graph() {
+		std::cout << "Graph destructor!" << std::endl;
+	}
+	void addVertex()
+	{
+		for (int i = 0; i < this->graphSize; i++)
+		{
+			int vectorPoz;
+			std::cout << "Enter the vertex value at pozition " << i << " : " << std::endl;
+			std::cin >> vectorPoz;
+			this->graphlist.push_back(new vertex(i, vectorPoz));
+		}
+	}
+	void addEdge(int x, int y)
+	{
+		this->graphlist.at(x)->edges.push_back(this->graphlist.at(y));
+		this->graphlist.at(y)->edges.push_back(this->graphlist.at(x));
+	}
+	void displayGraph()
+	{
+		for (int i = 0; i < this->graphSize; i++)
+		{
+			std::cout << this->graphlist.at(i)->vectorNum << ">";							//print vertex value
+			for (int x = 0; x < this->graphlist.at(i)->edges.size() ; x++)
+			{
+				std::cout << " | " << this->graphlist.at(i)->edges.at(x)->vectorNum;		//print edges value
+			}
+			std::cout << std::endl;
+		}
+	}
+	void DFS(vertex* Start)
+	{
+		std::stack<vertex*> Stack;
+		Stack.push(Start);
+		std::vector<vertex*>::iterator i;
+		file.open("DFSoutput.txt");
+		std::cout << "DFS: ";
+		file << "DFS: ";
+		while (!Stack.empty())
+		{
+			vertex* top = Stack.top();
+			std::cout << top->vectorNum << " ";
+			file << top->vectorNum << " ";
+			Stack.pop();
+			this->graphlist.at(top->value)->visited = true;
+			for (i = top->edges.begin(); i != top->edges.end() ; i++)
+			{
+				vertex* currentPos = *i;
+				if (currentPos->visited != true)
+				{
+					currentPos->visited = true;
+					Stack.push(*i);
+				}
+			}
+		}
+		file.close();
+	}
+	void BFS(vertex* Start)
+	{
+		std::queue<vertex*> Queve;
+		Queve.push(Start);
+		std::vector<vertex*>::iterator i;
+		file.open("DFSoutput.txt");
+		std::cout << "BFS: ";
+		file << "BFS: ";
+		while (!Queve.empty())
+		{
+			Start = Queve.front();
+			std::cout << Start->vectorNum << "  ";
+			file << Start->vectorNum << "  ";
+			this->graphlist.at(Start->value)->visited = true;
+			Queve.pop();
+			for (i = Start->edges.begin(); i != Start->edges.end(); i++)
+			{
+				vertex* currentPos = *i;
+				if (currentPos->visited != true)
+				{
+					currentPos->visited = true;
+					Queve.push(*i);
+				}
+			}
+		}
+		file.close();
+	}
+};
+
+int main(int argc, char *argv[])
+{
+	graph* G = new graph();				//create the graph
+	G->addVertex();
+	G->addEdge(0, 1);					//connect the eges (x <-> y)
+	G->addEdge(0, 2);
+	G->addEdge(1, 2);
+	G->addEdge(1, 3);
+	G->addEdge(2, 5);
+	G->addEdge(3, 4);
+	G->addEdge(5, 6);
+	G->displayGraph();
+	int startPoint;
+	std::cout << "DFS start at (input the pozition, not the vertex value):";
+	std::cin >> startPoint;
+	G->DFS(G->graphlist.at(startPoint));   // execute the bfs from pozition startPoint
+	std::cout << std::endl;
+	//G->BFS(G->graphlist.at(startPoint));   //  BFS canot be executed at the same time with DFS
+	//std::cout << std::endl;
+	delete G;
+	return 0;
+}

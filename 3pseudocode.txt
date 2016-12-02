@@ -1,0 +1,11 @@
+highestPerfectSquare(givenNr)
+	for i<-1 to infinite 
+		sqrNumber<-i^2
+		if sqrNumber = givenNr
+			outputNumber<-sqrNumber
+			break
+		else if sqrNumber > givenNr
+			break
+		outputNumber<-sqrNumber
+	return outputNumber
+	

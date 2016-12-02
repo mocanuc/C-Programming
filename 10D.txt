@@ -1,0 +1,59 @@
+#include "stdafx.h"
+#include<iostream>
+#include<vector>
+using namespace std;
+
+
+
+int main()
+{   
+	int vSize;
+	cout << "How big is your sequence?" << endl;
+	cin >> vSize;
+	cout << "Input yoursequence" << endl;
+	vector<int> inputSeq (vSize);
+	for (int x = 0; x < vSize; x++)
+	{
+		cin >> inputSeq[x];
+	}
+
+	int previusElement = inputSeq[0];
+	vector<int> outputVector(0);										//vector to be printed out
+	vector<int> storeVector(1);											//vector to store the subsequence
+	storeVector[0] = inputSeq[0];										//specify the first element because or loop start from 1
+	int size1 = 0;															//store the subsequence size
+	int size2;
+	int startPoint = 0;
+	int endPoint;
+
+	for (int i = 1; i < inputSeq.size(); i++)							//start from 1 to get the second element to compare with first elem
+	{
+		if (previusElement < inputSeq[i])									//compare to se if the element are in ascendin order
+		{
+			endPoint = i;
+			storeVector.insert(storeVector.end(), inputSeq[i]);			//get the elem from the sequenceand put in a subsequence
+		}
+		else
+		{
+			size2 = endPoint -startPoint + 1;
+			if (size2 > size1)											//compare the subsequence
+			{
+				outputVector.erase(outputVector.begin(), outputVector.end());	 //delete the outputVector in case we have a lot of subsequence
+				outputVector.swap(storeVector);									//if the next subsequence is bigger that last one swap it
+				size1 = size2;												//update the size
+			}
+			storeVector.insert(storeVector.end(), inputSeq[i]);
+			startPoint = endPoint;
+		}
+		previusElement = inputSeq[i];
+	}
+	//output
+	for (int i = 0; i < outputVector.size(); i++)
+	{
+
+		cout << outputVector[i];
+	}
+	return 0;
+}
+
+

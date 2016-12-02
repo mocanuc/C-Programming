@@ -1,0 +1,22 @@
+addition(A,B)
+	for i<-0 to orderN
+		for x<-0 to orderN
+			C[x][i]<-A[x][i]+B[x][i]
+subtraction(A,B)
+	for i<-0 to orderN
+		for x<-0 to orderN
+			 C[x][i]<-A[x][i]-B[x][i]
+multiplication(A,B)
+	for i<-0 to orderN
+		for x<-0 to orderN
+			 C[x][i]<-A[x][i]*B[i][x]
+multiplicationWithNumber(num, B)
+	for i<-0 to orderN
+		for x<-0 to orderN
+			C[x][i]<-num*B[i][x]
+			
+R1<-multiplication(B,C)
+R2<-addition(B,C)
+R3<-multiplicationWithNumber(R2, 2)
+R<-subtraction(R1,R3)
+A=B*C –2*(B+C)

@@ -1,0 +1,32 @@
+#include "stdafx.h"
+#include<iostream>
+#include<vector>
+#include <cstdlib>
+using namespace std;
+
+int main()
+
+{
+	//variables
+	int sum = 0;
+	int fraction = 0;
+	int givenNr;
+	//get my number
+	cout << "Please input your number:" << endl;
+	cin >> givenNr;
+
+	// divide the number by 5^i in a loop
+	for (int i = 1; i > 0; i++)
+	{
+		fraction = givenNr / pow(5, i);
+		sum = sum + fraction;
+		if (fraction == 0) 
+		{ 
+			break; 
+		}
+	}
+	// print the rezult
+	cout << sum;
+	return 0;
+}
+

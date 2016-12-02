@@ -1,0 +1,37 @@
+#include "stdafx.h"
+#include<iostream>
+#include<string>
+using namespace std;
+
+string reverseWords(string sentance)
+{
+	int biginWord = 0;
+	int endword = 0;
+	string outputSentance = "";
+	string space = " ";
+	string insertstr;
+	for (int i = 0; i < sentance.length(); i++)
+	{
+		if (sentance.at(i) == space.at(0))
+		{
+			insertstr = sentance.substr(biginWord, i - biginWord);
+			insertstr.insert(0, " ");
+			outputSentance.insert(0, insertstr);
+			biginWord = i + 1;
+		}
+		endword = i + 1;
+	}
+	insertstr = sentance.substr(biginWord, endword - biginWord);
+	insertstr.insert(0, " ");
+	outputSentance.insert(0, insertstr);
+	return outputSentance;
+}
+
+int main()
+{
+	string sentance = "";
+	cout << "Type a sentence" << endl;
+	getline(cin, sentance);
+	cout << reverseWords(sentance) << endl;
+	return 0;
+}
